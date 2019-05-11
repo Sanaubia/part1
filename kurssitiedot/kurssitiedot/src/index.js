@@ -2,72 +2,96 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 const Header = (props) => {
-
+  
     return(
-            <h1>{props.course}</h1>
-    )
-}
-
-const Part = (props) => {
- 
-    return(
-            <>
-            {props.part} {props.exercises}
-            </>
+            <h1>{props.course.name}</h1>
     )
 }
 
 
 const Content = (props) => {
-
+  console.log(props.parts)
     return(
-            <>
-            <Part part = {props.part} exercises = {props.exercises}/>
-            </>
+          <>
+          {props.course.parts[0].name} {props.course.parts[0].exercises}
+          <p>
+          {props.course.parts[1].name} {props.course.parts[2].exercises}
+          </p>
+          {props.course.parts[2].name} {props.course.parts[2].exercises}
+          </>
+      
          )
 }
 
 
 const Total = (props) => {
- 
+    const i = props.course.parts[0].exercises + props.course.parts[1].exercises + props.course.parts[2].exercises
     return(
             <>
-            yhteensä {props.yhteensa} tehtävää
+
+            <p>
+            Yhteensä {i} tehtävää
+            </p>
+
             </>
     )
 }
 
 
+
 const App = () => {
-  const course = 'Half Stack -sovelluskehitys'
-  const part1 = 'Reactin perusteet'
-  const exercises1 = 10
-  const part2 = 'Tiedonvälitys propseilla'
-  const exercises2 = 7
-  const part3 = 'Komponenttien tila'
-  const exercises3 = 14
+  const course = {
+    name: 'Half Stack -sovelluskehitys',
+    parts: [
+      {
+        name: 'Reactin perusteet',
+        exercises: 10
+      },
+      {
+        name: 'Tiedonvälitys propseilla',
+        exercises: 7
+      },
+      {
+        name: 'Komponenttien tila',
+        exercises: 14
+      }
+    ]
+  }
 
-  return (
-    <>
-        <Header course ={course}/>
+  
+    return (
+      <div>
+       
+        <Header course = {course}/>
 
-        <p>
-        <Content part = {part1} exercises = {exercises1}/>         
-        </p>
+        
+        <Content course = {course}/>
+        
 
-        <p>
-        <Content part = {part2} exercises = {exercises2}/> 
-        </p>
+        
 
-        <p>
-        <Content part = {part3} exercises = {exercises3}/>  
-        </p>
+        <Total course = {course}/>
+        
+        
+           
+      </div>
+    )
+  }
 
-        <p>
-        <Total yhteensa = {exercises1 + exercises2 + exercises3}/>       
-        </p>
-    </>
-  )
-}
+  class Person {
+    constructor(name, age) {
+      this.name = name
+      this.age = age
+    }
+    greet() {
+      console.log('hello, my name is', this.name)
+    }
+  }
+  
+  const arto = new Person('Arto Hellas', 35)
+  arto.greet()
+  
+  const juhq = new Person('Juha Tauriainen', 48)
+  juhq.greet()
 
 ReactDOM.render(<App />, document.getElementById('root'))
