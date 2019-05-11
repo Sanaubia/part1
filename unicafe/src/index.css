@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.is-grouped {   
+  display: inline-block;
+  background-color: yellow;
+}
+
+.is-grouped > .button:not(:last-child) {
+  margin-right: 10px;
+}
