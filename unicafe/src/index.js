@@ -1,20 +1,56 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const Statistics = (props) =>{
-  return(
-    <div>
-      <h1>Statistics</h1>
-    
-    <p>Hyvä {props.good}</p>     
-    </div>
-    
+const Statistic  = (props) =>{
+  console.log("Painettu")
+  
+return(
+<> 
 
-    )
-
-
+  <table>
+    <tbody>
+      
+      <tr>
+        <td>{props.text}</td>
+        <td>{props.value}{props.text1}</td>
+      </tr>
+      </tbody>
+   
+  </table>
+</>
+ 
+  )
 }
 
+
+const Statistics = (props) =>{
+  
+    if(props.allClicks === 0)
+    {
+      return <p>Yhtään arvostelua ei ole annettu</p>
+    }
+    else{
+    return(
+      
+      <>
+      <Statistic text = "Hyvä" value={props.good}/>
+      <Statistic text = "Huono" value={props.bad}/>
+      <Statistic text = "Yhteensä" value={props.allClicks}/>
+      <Statistic text = "Keskiarvo" value={props.average}/>
+      <Statistic text = "Positiivista" value={props.positive} text1 = "%"/>
+      </>
+   
+      )
+    }
+  }
+    
+
+
+const Button = (props) => (
+  <button style ={{marginRight: 10}} onClick={props.handleClick}>
+    {props.text}
+  </button>
+)
 
 const App = () => {
   // tallenna napit omaan tilaansa
@@ -50,18 +86,17 @@ const App = () => {
     
     <h1>Anna palautetta</h1>
         
-
-    <button style ={{marginRight: 10}} onClick ={goodClick}>Good</button>
-      <button style ={{marginRight: 10}} onClick ={neutralClick}>Neutral</button>
-      <button onClick ={badClick}>Bad</button>
-      
-    
-  <table>
-    <Statistics good = {good}/>
+    <Button handleClick = {() => goodClick()} text="Good" />
+          
+    <Button handleClick = {() => neutralClick()} text="Neutral" />
+          
+    <Button handleClick = {() => badClick()} text="Bad" />
   
-
-  </table>
-
+    
+    <h1>Statistiikka</h1>
+    <Statistics good = {good} neutral = {neutral} bad = {bad} allClicks = {allClicks} average = {average/allClicks} positive = { good / allClicks * 100}/>
+    
+    
     </div>
   )
 }

@@ -12,11 +12,3 @@ code {
     monospace;
 }
 
-.is-grouped {   
-  display: inline-block;
-  background-color: yellow;
-}
-
-.is-grouped > .button:not(:last-child) {
-  margin-right: 10px;
-}
